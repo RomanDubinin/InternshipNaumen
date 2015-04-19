@@ -35,10 +35,12 @@ public class Searcher implements ISearcher
         ArrayList<ClassItem> finededItems = PrefixTree.FindClassItemsByPrefix(start);
         int realNum = Math.min(finededItems.size(), MaxNum);
 
-        List<ClassItem> selected = finededItems.subList(0, realNum);
+
         Collections.sort(
-                selected,
-                (item1, item2) -> (int)(item1.GetModificationDate()  - item2.GetModificationDate()));
+                finededItems,
+                (item1, item2) -> (int)(item2.GetModificationDate()  - item1.GetModificationDate()));
+
+        List<ClassItem> selected = finededItems.subList(0, realNum);
 
         String[] result = new String[realNum];
         for (int i = 0; i < realNum; i ++)

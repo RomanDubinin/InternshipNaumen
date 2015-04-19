@@ -4,7 +4,6 @@ import java.util.Optional;
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-
 /**
  * Created by Roman on 18/04/2015.
  */
@@ -56,8 +55,7 @@ public class PrefixTree
             currentNode = bfsQueue.poll();
             if (currentNode.ClassItem != null)
                 finededClasses.add(currentNode.ClassItem);
-            for (Node nextNode : currentNode.GetSubNodes())
-                bfsQueue.add(nextNode);
+            bfsQueue.addAll(currentNode.GetSubNodes());
         }
 
         return finededClasses;
@@ -65,7 +63,7 @@ public class PrefixTree
 
     private Node FindNodeByKey(List<Node> nodes, char key)
     {
-        Optional<Node> otionalFineded = nodes.stream().filter(node -> node.GetKey() == key).findFirst();
-        return otionalFineded.isPresent() ? otionalFineded.get() : null;
+        Optional<Node> otionalNode = nodes.stream().filter(node -> node.GetKey() == key).findFirst();
+        return otionalNode.isPresent() ? otionalNode.get() : null;
     }
 }

@@ -1,3 +1,4 @@
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -70,5 +71,27 @@ public class SearcherTests
         String[] expectedNames = {"12999", "12998", "12997", "12996", "12995", "12994", "12993", "12992", "12991", "12990", "12989", "12988"};
 
         Assert.assertEquals(expectedNames, actualNames);
+    }
+
+    public void testSearcher4() throws Exception
+    {
+        String[] names = new String[10];
+        long[] dates = new long[12];
+
+
+
+        Searcher searcher = new Searcher();
+
+        boolean thrown = false;
+        try
+        {
+            searcher.Refresh(names, dates);
+        }
+        catch (IllegalArgumentException ex)
+        {
+            thrown = true;
+        }
+
+        Assert.assertTrue(thrown);
     }
 }

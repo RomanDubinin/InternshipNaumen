@@ -32,15 +32,15 @@ public class Searcher implements ISearcher
     @Override
     public String[] Guess(String start)
     {
-        ArrayList<ClassItem> finededItems = PrefixTree.FindClassItemsByPrefix(start);
-        int realNum = Math.min(finededItems.size(), MaxNum);
+        ArrayList<ClassItem> foundItems = PrefixTree.FindClassItemsByPrefix(start);
+        int realNum = Math.min(foundItems.size(), MaxNum);
 
 
         Collections.sort(
-                finededItems,
-                (item1, item2) -> (int)(item2.GetModificationDate()  - item1.GetModificationDate()));
+                foundItems,
+                (item1, item2) -> (int) (item2.GetModificationDate() - item1.GetModificationDate()));
 
-        List<ClassItem> selected = finededItems.subList(0, realNum);
+        List<ClassItem> selected = foundItems.subList(0, realNum);
 
         String[] result = new String[realNum];
         for (int i = 0; i < realNum; i ++)
